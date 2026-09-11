@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VASTRA — Clothing for Every Age, Every Body</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14161c;
+    --panel:#1c1f29;
+    --panel-2:#20242f;
+    --line:#2c303b;
+    --paper:#f3f0e8;
+    --muted:#9b9fae;
+    --gold:#c9a227;
+    --gold-soft:#e7c866;
+    --rose:#c97b84;
+    --font-display:'Fraunces', serif;
+    --font-body:'Work Sans', sans-serif;
+    --radius:2px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--font-body);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  button{font-family:inherit; cursor:pointer;}
+  ::selection{background:var(--gold); color:var(--ink);}
+  :focus-visible{outline:2px solid var(--gold-soft); outline-offset:2px;}
+
+  .wrap{max-width:1240px; margin:0 auto; padding:0 28px;}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(20,22,28,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .header-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 28px; gap:24px; max-width:1240px; margin:0 auto;
+  }
+  .logo{
+    font-family:var(--font-display);
+    font-size:1.7rem; font-weight:600; letter-spacing:0.5px;
+    flex-shrink:0;
+  }
+  .logo span{color:var(--gold);}
+  .search-bar{
+    flex:1; max-width:420px;
+    display:flex; align-items:center; gap:10px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:9px 14px;
+    border-radius:var(--radius);
+  }
+  .search-bar input{
+    flex:1; background:none; border:none; color:var(--paper);
+    font-family:var(--font-body); font-size:0.92rem;
+  }
+  .search-bar input::placeholder{color:var(--muted);}
+  .search-bar svg{flex-shrink:0; opacity:0.6;}
+  .header-actions{display:flex; align-items:center; gap:18px; flex-shrink:0;}
+  .icon-btn{
+    position:relative; display:flex; align-items:center; justify-content:center;
+    width:40px; height:40px; border:1px solid var(--line); background:var(--panel);
+    border-radius:var(--radius); transition:border-color .2s;
+  }
+  .icon-btn:hover{border-color:var(--gold);}
+  .cart-count{
+    position:absolute; top:-7px; right:-7px;
+    background:var(--gold); color:var(--ink);
+    font-size:0.68rem; font-weight:700;
+    width:18px; height:18px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .filter-toggle{display:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:80px 28px 70px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-inner{
+    max-width:1240px; margin:0 auto;
+    display:grid; grid-template-columns:1.05fr 0.95fr; gap:64px; align-items:center;
+  }
+  .hero-eyebrow{
+    color:var(--gold-soft); font-size:0.85rem; letter-spacing:0.3px; margin-bottom:18px;
+  }
+  .hero h1{
+    font-family:var(--font-display);
+    font-weight:500;
+    font-size:clamp(2.4rem, 4.2vw, 3.6rem);
+    line-height:1.08;
+    max-width:11ch;
+  }
+  .hero p{
+    color:var(--muted); font-size:1.05rem; max-width:42ch; margin:24px 0 34px;
+  }
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:14px 26px; font-size:0.92rem; font-weight:600;
+    border-radius:var(--radius); border:1px solid transparent;
+    transition:transform .15s ease, background .2s, border-color .2s, color .2s;
+  }
+  .btn:active{transform:scale(0.98);}
+  .btn-primary{background:var(--gold); color:var(--ink);}
+  .btn-primary:hover{background:var(--gold-soft);}
+  .btn-outline{border-color:var(--line); color:var(--paper); background:transparent;}
+  .btn-outline:hover{border-color:var(--gold);}
+  .btn-full{width:100%;}
+  .btn-sm{padding:10px 16px; font-size:0.82rem;}
+
+  .hero-collage{
+    position:relative; display:grid; grid-template-columns:1fr 1fr; gap:16px; height:440px;
+  }
+  .hero-collage img{
+    width:100%; height:100%; object-fit:cover; border-radius:var(--radius);
+  }
+  .hero-collage .tall{grid-row:span 2;}
+  .hero-collage .col{display:grid; gap:16px;}
+
+  .brand-strip{
+    padding:22px 28px; border-bottom:1px solid var(--line);
+    display:flex; justify-content:center; gap:40px; flex-wrap:wrap;
+    font-family:var(--font-display); font-style:italic; font-size:1rem; color:var(--muted);
+  }
+
+  /* ---------- CATALOG ---------- */
+  .catalog{padding:64px 28px 100px;}
+  .catalog-inner{max-width:1240px; margin:0 auto;}
+  .catalog-head{
+    display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:36px; gap:20px; flex-wrap:wrap;
+  }
+  .catalog-head h2{
+    font-family:var(--font-display); font-weight:500; font-size:2rem;
+  }
+  .result-count{color:var(--muted); font-size:0.9rem;}
+
+  .catalog-grid{
+    display:grid; grid-template-columns:240px 1fr; gap:48px; align-items:start;
+  }
+
+  /* ---- Filters ---- */
+  .filters{
+    position:sticky; top:96px;
+    display:flex; flex-direction:column; gap:30px;
+  }
+  .filter-group{border-bottom:1px solid var(--line); padding-bottom:22px;}
+  .filter-group:last-child{border-bottom:none;}
+  .filter-title{
+    font-size:0.78rem; letter-spacing:0.4px; color:var(--muted); margin-bottom:14px;
+  }
+  .filter-options{display:flex; flex-direction:column; gap:10px;}
+  .chip-row{display:flex; gap:8px; flex-wrap:wrap;}
+  .chip{
+    padding:8px 14px; border:1px solid var(--line); border-radius:20px;
+    font-size:0.82rem; color:var(--muted); background:transparent; transition:.2s;
+  }
+  .chip.active{background:var(--gold); border-color:var(--gold); color:var(--ink); font-weight:600;}
+  .check-row{display:flex; align-items:center; gap:10px; font-size:0.88rem; color:var(--paper); cursor:pointer;}
+  .check-row input{accent-color:var(--gold); width:15px; height:15px; cursor:pointer;}
+  .clear-filters{
+    background:none; border:none; color:var(--gold-soft); font-size:0.82rem; text-align:left; padding:0;
+  }
+  .clear-filters:hover{text-decoration:underline;}
+
+  /* ---- Product Grid ---- */
+  .products{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:26px;
+  }
+  .card{
+    background:var(--panel); border:1px solid var(--line); overflow:hidden;
+    display:flex; flex-direction:column; transition:border-color .2s;
+  }
+  .card:hover{border-color:#3a3f4d;}
+  .card-img{width:100%; aspect-ratio:4/5; overflow:hidden; background:var(--panel-2);}
+  .card-img img{width:100%; height:100%; object-fit:cover;}
+  .card-body{padding:16px 16px 18px; display:flex; flex-direction:column; gap:8px; flex:1;}
+  .card-tags{display:flex; gap:6px; flex-wrap:wrap;}
+  .tag{
+    font-size:0.68rem; padding:3px 8px; border:1px solid var(--line); color:var(--muted); border-radius:12px;
+  }
+  .card-name{font-size:1rem; font-weight:600; margin-top:2px;}
+  .card-type{font-size:0.8rem; color:var(--muted);}
+  .card-price{font-family:var(--font-display); font-size:1.25rem; color:var(--gold-soft); margin-top:2px;}
+  .card-actions{display:flex; gap:8px; margin-top:auto; padding-top:10px;}
+  .card-actions .btn{flex:1; padding:10px 8px; font-size:0.78rem;}
+
+  .empty-state{
+    grid-column:1/-1; text-align:center; padding:70px 20px; color:var(--muted);
+  }
+  .empty-state h3{font-family:var(--font-display); color:var(--paper); font-size:1.4rem; margin-bottom:8px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid var(--line); padding:56px 28px 32px;}
+  .footer-inner{
+    max-width:1240px; margin:0 auto; display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px;
+  }
+  footer h4{font-size:0.8rem; letter-spacing:0.4px; color:var(--muted); margin-bottom:14px;}
+  footer .logo{margin-bottom:14px;}
+  footer p{color:var(--muted); font-size:0.88rem; max-width:34ch;}
+  footer ul{list-style:none; display:flex; flex-direction:column; gap:10px;}
+  footer ul a{color:var(--paper); font-size:0.9rem; opacity:0.85;}
+  footer ul a:hover{opacity:1; color:var(--gold-soft);}
+  .footer-bottom{
+    max-width:1240px; margin:40px auto 0; padding-top:24px; border-top:1px solid var(--line);
+    color:var(--muted); font-size:0.8rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+
+  /* ---------- DRAWER (Cart / Checkout) ---------- */
+  .overlay{
+    position:fixed; inset:0; background:rgba(10,11,14,0.6); z-index:90;
+    opacity:0; pointer-events:none; transition:opacity .25s;
+  }
+  .overlay.open{opacity:1; pointer-events:auto;}
+  .drawer{
+    position:fixed; top:0; right:0; height:100%; width:420px; max-width:92vw;
+    background:var(--panel); border-left:1px solid var(--line); z-index:95;
+    transform:translateX(100%); transition:transform .3s ease;
+    display:flex; flex-direction:column;
+  }
+  .drawer.open{transform:translateX(0);}
+  .drawer-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px 24px; border-bottom:1px solid var(--line);
+  }
+  .drawer-head h3{font-family:var(--font-display); font-weight:500; font-size:1.3rem;}
+  .drawer-close{background:none; border:none; color:var(--paper); font-size:1.4rem; line-height:1;}
+  .drawer-body{padding:22px 24px; overflow-y:auto; flex:1; display:flex; flex-direction:column; gap:18px;}
+  .drawer-foot{padding:20px 24px; border-top:1px solid var(--line);}
+
+  .cart-item{display:flex; gap:14px; padding-bottom:16px; border-bottom:1px solid var(--line);}
+  .cart-item img{width:64px; height:80px; object-fit:cover; border-radius:var(--radius); flex-shrink:0;}
+  .cart-item-info{flex:1; display:flex; flex-direction:column; gap:4px;}
+  .cart-item-info .name{font-size:0.92rem; font-weight:600;}
+  .cart-item-info .meta{font-size:0.76rem; color:var(--muted);}
+  .qty-row{display:flex; align-items:center; gap:10px; margin-top:4px;}
+  .qty-btn{
+    width:24px; height:24px; border:1px solid var(--line); background:transparent; color:var(--paper);
+    display:flex; align-items:center; justify-content:center; font-size:0.85rem;
+  }
+  .qty-row span{font-size:0.85rem; min-width:16px; text-align:center;}
+  .remove-btn{background:none; border:none; color:var(--rose); font-size:0.76rem; margin-left:auto; text-decoration:underline;}
+  .cart-item-price{font-size:0.9rem; color:var(--gold-soft); white-space:nowrap;}
+
+  .cart-empty{color:var(--muted); text-align:center; padding:40px 0; font-size:0.9rem;}
+  .total-row{display:flex; justify-content:space-between; margin-bottom:16px; font-size:1rem;}
+  .total-row span:last-child{font-family:var(--font-display); color:var(--gold-soft); font-size:1.2rem;}
+
+  .field{display:flex; flex-direction:column; gap:6px;}
+  .field label{font-size:0.8rem; color:var(--muted);}
+  .field input, .field textarea{
+    background:var(--panel-2); border:1px solid var(--line); color:var(--paper);
+    padding:11px 13px; font-family:var(--font-body); font-size:0.9rem; border-radius:var(--radius);
+    resize:vertical;
+  }
+  .field input:focus, .field textarea:focus{border-color:var(--gold);}
+  .checkout-order-summary{
+    background:var(--panel-2); border:1px solid var(--line); padding:14px; font-size:0.82rem; color:var(--muted);
+    display:flex; flex-direction:column; gap:6px;
+  }
+  .back-link{background:none; border:none; color:var(--gold-soft); font-size:0.82rem; text-align:left; margin-bottom:4px;}
+
+  /* ---------- MOBILE ---------- */
+  @media (max-width: 900px){
+    .hero-inner{grid-template-columns:1fr; gap:40px;}
+    .hero-collage{height:320px; order:-1;}
+    .catalog-grid{grid-template-columns:1fr;}
+    .filters{
+      position:fixed; top:0; left:0; height:100%; width:280px; max-width:85vw;
+      background:var(--panel); z-index:96; padding:24px; overflow-y:auto;
+      transform:translateX(-100%); transition:transform .3s ease; border-right:1px solid var(--line);
+      top:0;
+    }
+    .filters.open{transform:translateX(0);}
+    .filters-close{display:flex; justify-content:flex-end; margin-bottom:10px;}
+    .filters-close button{background:none; border:none; color:var(--paper); font-size:1.4rem;}
+    .filter-toggle{
+      display:flex; align-items:center; gap:8px; border:1px solid var(--line); background:var(--panel);
+      color:var(--paper); padding:9px 16px; border-radius:var(--radius); font-size:0.85rem; flex-shrink:0;
+    }
+    .search-bar{order:3; max-width:100%; flex-basis:100%;}
+    .header-row{flex-wrap:wrap;}
+    .products{grid-template-columns:repeat(2, 1fr);}
+  }
+  @media (max-width: 560px){
+    .products{grid-template-columns:1fr 1fr; gap:14px;}
+    .hero{padding:56px 20px 50px;}
+    .catalog{padding:48px 20px 70px;}
+    .card-actions{flex-direction:column;}
+    .footer-inner{grid-template-columns:1fr; gap:30px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-row">
+    <button class="filter-toggle" id="filterToggle" aria-label="Open filters">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
+      Filters
+    </button>
+    <a href="#top" class="logo">VAS<span>TRA</span></a>
+    <div class="search-bar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="searchInput" placeholder="Search shirts, dresses, sets…">
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn" id="cartBtn" aria-label="Open cart">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-13z"/><path d="M6 6L4 2H2"/><circle cx="9" cy="21" r="1"/><circle cx="18" cy="21" r="1"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">A wardrobe with no boundaries</div>
+      <h1>Clothing that fits every age and every body.</h1>
+      <p>From toddlers to grandparents, menswear to womenswear — one storefront, honest prices, and pieces built to actually be worn. Filter by who it's for, not by what's trending.</p>
+      <div class="hero-ctas">
+        <a href="#shop" class="btn btn-primary">Shop the collection</a>
+        <a href="#about" class="btn btn-outline">Our story</a>
+      </div>
+    </div>
+    <div class="hero-collage">
+      <div class="col">
+        <img src="https://loremflickr.com/400/210/menswear,shirt/all?lock=11" alt="Men's shirt">
+        <img src="https://loremflickr.com/400/210/kidswear,children/all?lock=12" alt="Kids clothing">
+      </div>
+      <img class="tall" src="https://loremflickr.com/400/440/womenswear,dress/all?lock=13" alt="Women's dress">
+    </div>
+  </div>
+</section>
+
+<div class="brand-strip">
+  <span>Menswear</span>
+  <span>Womenswear</span>
+  <span>Kidswear</span>
+  <span>Everyday Sets</span>
+  <span>All Budgets</span>
+</div>
+
+<section class="catalog" id="shop">
+  <div class="catalog-inner">
+    <div class="catalog-head">
+      <h2>The Collection</h2>
+      <div class="result-count" id="resultCount"></div>
+    </div>
+
+    <div class="catalog-grid">
+      <aside class="filters" id="filtersPanel">
+        <div class="filters-close">
+          <button id="filtersClose" aria-label="Close filters">✕</button>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-title">GENDER</div>
+          <div class="chip-row" id="genderChips">
+            <button class="chip active" data-gender="all">All</button>
+            <button class="chip" data-gender="male">Male</button>
+            <button class="chip" data-gender="female">Female</button>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-title">AGE GROUP</div>
+          <div class="filter-options" id="ageOptions">
+            <label class="check-row"><input type="checkbox" value="1-10"> 1 – 10 yrs</label>
+            <label class="check-row"><input type="checkbox" value="10-20"> 10 – 20 yrs</label>
+            <label class="check-row"><input type="checkbox" value="20-30"> 20 – 30 yrs</label>
+            <label class="check-row"><input type="checkbox" value="30-40"> 30 – 40 yrs</label>
+            <label class="check-row"><input type="checkbox" value="40+"> 40+ yrs</label>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-title">CLOTHING TYPE</div>
+          <div class="filter-options" id="typeOptions">
+            <label class="check-row"><input type="checkbox" value="Shirt"> Shirt</label>
+            <label class="check-row"><input type="checkbox" value="T-Shirt"> T-Shirt</label>
+            <label class="check-row"><input type="checkbox" value="Shirt & Pant Combo"> Shirt &amp; Pant Combo</label>
+            <label class="check-row"><input type="checkbox" value="T-Shirt & Lower"> T-Shirt &amp; Lower</label>
+            <label class="check-row"><input type="checkbox" value="Pant"> Pant</label>
+            <label class="check-row"><input type="checkbox" value="Dress"> Dress</label>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <div class="filter-title">PRICE</div>
+          <div class="filter-options" id="priceOptions">
+            <label class="check-row"><input type="checkbox" value="under500"> Under ₹500</label>
+            <label class="check-row"><input type="checkbox" value="500-1000"> ₹500 – ₹1000</label>
+            <label class="check-row"><input type="checkbox" value="1000-2000"> ₹1000 – ₹2000</label>
+            <label class="check-row"><input type="checkbox" value="2000plus"> ₹2000 and above</label>
+          </div>
+        </div>
+
+        <button class="clear-filters" id="clearFilters">Reset all filters</button>
+      </aside>
+
+      <div class="products" id="productGrid"></div>
+    </div>
+  </div>
+</section>
+
+<footer id="about">
+  <div class="footer-inner">
+    <div>
+      <a href="#top" class="logo">VAS<span>TRA</span></a>
+      <p>VASTRA was started with one idea: clothing shouldn't be sorted into "trendy" and "the rest." We stock honest, wearable pieces for every age and every gender, priced fairly.</p>
+    </div>
+    <div>
+      <h4>SHOP</h4>
+      <ul>
+        <li><a href="#shop">All Products</a></li>
+        <li><a href="#shop">Menswear</a></li>
+        <li><a href="#shop">Womenswear</a></li>
+        <li><a href="#shop">Kidswear</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>GET IN TOUCH</h4>
+      <ul>
+        <li><a href="https://wa.me/917425932172" target="_blank" rel="noopener">WhatsApp Orders</a></li>
+        <li><a href="#shop">Track an Order</a></li>
+        <li><a href="#shop">Size Guide</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 VASTRA Clothing Co.</span>
+    <span>Orders are confirmed over WhatsApp</span>
+  </div>
+</footer>
+
+<!-- Overlay + Drawer -->
+<div class="overlay" id="overlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h3 id="drawerTitle">Your Bag</h3>
+    <button class="drawer-close" id="drawerClose" aria-label="Close">✕</button>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+  <div class="drawer-foot" id="drawerFoot"></div>
+</div>
+
+<script>
+// ---------------- PRODUCT DATA ----------------
+const PRODUCTS = [
+  {id:1, name:"Classic Oxford Shirt", gender:"male", age:"20-30", type:"Shirt", price:1299, kw:"mens,oxford-shirt"},
+  {id:2, name:"Everyday Crew T-Shirt", gender:"male", age:"20-30", type:"T-Shirt", price:449, kw:"mens,tshirt"},
+  {id:3, name:"Weekend Shirt & Pant Combo", gender:"male", age:"30-40", type:"Shirt & Pant Combo", price:2199, kw:"mens,shirt,pants"},
+  {id:4, name:"Relaxed Tee & Lower Set", gender:"male", age:"20-30", type:"T-Shirt & Lower", price:899, kw:"mens,joggers,tshirt"},
+  {id:5, name:"Tailored Chino Pant", gender:"male", age:"30-40", type:"Pant", price:1099, kw:"mens,chino,pants"},
+  {id:6, name:"Formal Office Shirt", gender:"male", age:"30-40", type:"Shirt", price:1499, kw:"mens,formal-shirt"},
+  {id:7, name:"Senior Comfort Shirt", gender:"male", age:"40+", type:"Shirt", price:1199, kw:"mens,shirt,casual"},
+  {id:8, name:"Senior Comfort Pant", gender:"male", age:"40+", type:"Pant", price:999, kw:"mens,trousers"},
+  {id:9, name:"Teen Graphic T-Shirt", gender:"male", age:"10-20", type:"T-Shirt", price:399, kw:"teenager,tshirt"},
+  {id:10, name:"Teen Shirt & Pant Combo", gender:"male", age:"10-20", type:"Shirt & Pant Combo", price:1699, kw:"teenager,shirt"},
+  {id:11, name:"Boys Tee & Lower Set", gender:"male", age:"1-10", type:"T-Shirt & Lower", price:549, kw:"kids,boy,clothing"},
+  {id:12, name:"Little Boy Shirt", gender:"male", age:"1-10", type:"Shirt", price:499, kw:"kids,shirt"},
+
+  {id:13, name:"Floral Summer Dress", gender:"female", age:"20-30", type:"Dress", price:1599, kw:"womens,dress,floral"},
+  {id:14, name:"Everyday Basic T-Shirt", gender:"female", age:"20-30", type:"T-Shirt", price:429, kw:"womens,tshirt"},
+  {id:15, name:"Linen Shirt & Pant Combo", gender:"female", age:"30-40", type:"Shirt & Pant Combo", price:2399, kw:"womens,linen,shirt"},
+  {id:16, name:"Cozy Tee & Lower Set", gender:"female", age:"20-30", type:"T-Shirt & Lower", price:849, kw:"womens,loungewear"},
+  {id:17, name:"High-Waist Pant", gender:"female", age:"20-30", type:"Pant", price:999, kw:"womens,trousers"},
+  {id:18, name:"Evening Wrap Dress", gender:"female", age:"30-40", type:"Dress", price:1899, kw:"womens,dress,evening"},
+  {id:19, name:"Senior Comfort Shirt", gender:"female", age:"40+", type:"Shirt", price:1099, kw:"womens,shirt,casual"},
+  {id:20, name:"Senior Elegant Dress", gender:"female", age:"40+", type:"Dress", price:1699, kw:"womens,dress,elegant"},
+  {id:21, name:"Teen Casual Dress", gender:"female", age:"10-20", type:"Dress", price:899, kw:"teenager,girl,dress"},
+  {id:22, name:"Teen Tee & Lower Set", gender:"female", age:"10-20", type:"T-Shirt & Lower", price:649, kw:"teenager,girl,tshirt"},
+  {id:23, name:"Girls Frock Shirt", gender:"female", age:"1-10", type:"Dress", price:599, kw:"kids,girl,frock"},
+  {id:24, name:"Little Girl Tee & Lower Set", gender:"female", age:"1-10", type:"T-Shirt & Lower", price:529, kw:"kids,girl,clothing"},
+];
+
+const WHATSAPP_NUMBER = "917425932172";
+
+// ---------------- STATE ----------------
+let state = {
+  search: "",
+  gender: "all",
+  ages: [],
+  types: [],
+  prices: []
+};
+let cart = []; // {id, qty}
+let drawerMode = null; // 'cart' | 'checkout'
+
+// ---------------- HELPERS ----------------
+function imgUrl(kw, seed){
+  return `https://loremflickr.com/500/625/${kw}/all?lock=${seed}`;
+}
+function fmt(n){ return "₹" + n.toLocaleString("en-IN"); }
+
+function priceMatchesRange(price, rangeKey){
+  if(rangeKey === "under500") return price < 500;
+  if(rangeKey === "500-1000") return price >= 500 && price <= 1000;
+  if(rangeKey === "1000-2000") return price > 1000 && price <= 2000;
+  if(rangeKey === "2000plus") return price > 2000;
+  return true;
+}
+
+function filteredProducts(){
+  return PRODUCTS.filter(p => {
+    if(state.search && !p.name.toLowerCase().includes(state.search.toLowerCase()) && !p.type.toLowerCase().includes(state.search.toLowerCase())) return false;
+    if(state.gender !== "all" && p.gender !== state.gender) return false;
+    if(state.ages.length && !state.ages.includes(p.age)) return false;
+    if(state.types.length && !state.types.includes(p.type)) return false;
+    if(state.prices.length && !state.prices.some(r => priceMatchesRange(p.price, r))) return false;
+    return true;
+  });
+}
+
+// ---------------- RENDER PRODUCTS ----------------
+function renderProducts(){
+  const grid = document.getElementById("productGrid");
+  const list = filteredProducts();
+  document.getElementById("resultCount").textContent = `${list.length} piece${list.length !== 1 ? "s" : ""}`;
+
+  if(!list.length){
+    grid.innerHTML = `<div class="empty-state"><h3>Nothing matches yet</h3><p>Try clearing a filter or searching a different term.</p></div>`;
+    return;
+  }
+
+  grid.innerHTML = list.map(p => `
+    <div class="card">
+      <div class="card-img"><img src="${imgUrl(p.kw, p.id)}" alt="${p.name}" loading="lazy"></div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">${p.gender === "male" ? "Male" : "Female"}</span>
+          <span class="tag">${p.age} yrs</span>
+        </div>
+        <div class="card-name">${p.name}</div>
+        <div class="card-type">${p.type}</div>
+        <div class="card-price">${fmt(p.price)}</div>
+        <div class="card-actions">
+          <button class="btn btn-outline" onclick="addToCart(${p.id})">Add to Bag</button>
+          <button class="btn btn-primary" onclick="buyNow(${p.id})">Buy Now</button>
+        </div>
+      </div>
+    </div>
+  `).join("");
+}
+
+// ---------------- CART ----------------
+function addToCart(id, silent){
+  const existing = cart.find(c => c.id === id);
+  if(existing) existing.qty += 1;
+  else cart.push({id, qty:1});
+  updateCartCount();
+  if(!silent) flashCart();
+}
+function flashCart(){
+  const btn = document.getElementById("cartBtn");
+  btn.style.borderColor = "var(--gold)";
+  setTimeout(()=> btn.style.borderColor = "", 400);
+}
+function updateCartCount(){
+  document.getElementById("cartCount").textContent = cart.reduce((s,c)=>s+c.qty,0);
+}
+function cartTotal(){
+  return cart.reduce((sum, c) => {
+    const p = PRODUCTS.find(pr => pr.id === c.id);
+    return sum + (p ? p.price * c.qty : 0);
+  }, 0);
+}
+function changeQty(id, delta){
+  const item = cart.find(c => c.id === id);
+  if(!item) return;
+  item.qty += delta;
+  if(item.qty <= 0) cart = cart.filter(c => c.id !== id);
+  updateCartCount();
+  renderDrawer();
+}
+function removeItem(id){
+  cart = cart.filter(c => c.id !== id);
+  updateCartCount();
+  renderDrawer();
+}
+
+function buyNow(id){
+  addToCart(id, true);
+  openDrawer("checkout");
+}
+
+// ---------------- DRAWER ----------------
+function openDrawer(mode){
+  drawerMode = mode;
+  document.getElementById("overlay").classList.add("open");
+  document.getElementById("drawer").classList.add("open");
+  renderDrawer();
+}
+function closeDrawer(){
+  document.getElementById("overlay").classList.remove("open");
+  document.getElementById("drawer").classList.remove("open");
+}
+
+function renderDrawer(){
+  const title = document.getElementById("drawerTitle");
+  const body = document.getElementById("drawerBody");
+  const foot = document.getElementById("drawerFoot");
+
+  if(drawerMode === "cart"){
+    title.textContent = "Your Bag";
+    if(!cart.length){
+      body.innerHTML = `<div class="cart-empty">Your bag is empty. Add something you'll actually wear.</div>`;
+      foot.innerHTML = "";
+      return;
+    }
+    body.innerHTML = cart.map(c => {
+      const p = PRODUCTS.find(pr => pr.id === c.id);
+      return `
+        <div class="cart-item">
+          <img src="${imgUrl(p.kw, p.id)}" alt="${p.name}">
+          <div class="cart-item-info">
+            <div class="name">${p.name}</div>
+            <div class="meta">${p.type} · ${p.gender === "male" ? "Male" : "Female"} · ${p.age} yrs</div>
+            <div class="qty-row">
+              <button class="qty-btn" onclick="changeQty(${p.id},-1)">−</button>
+              <span>${c.qty}</span>
+              <button class="qty-btn" onclick="changeQty(${p.id},1)">+</button>
+              <button class="remove-btn" onclick="removeItem(${p.id})">Remove</button>
+            </div>
+          </div>
+          <div class="cart-item-price">${fmt(p.price * c.qty)}</div>
+        </div>
+      `;
+    }).join("");
+
+    foot.innerHTML = `
+      <div class="total-row"><span>Total</span><span>${fmt(cartTotal())}</span></div>
+      <button class="btn btn-primary btn-full" onclick="openDrawer('checkout')">Checkout via WhatsApp</button>
+    `;
+  }
+
+  if(drawerMode === "checkout"){
+    title.textContent = "Your Details";
+    if(!cart.length){
+      body.innerHTML = `<div class="cart-empty">Your bag is empty.</div>`;
+      foot.innerHTML = "";
+      return;
+    }
+    const summary = cart.map(c => {
+      const p = PRODUCTS.find(pr => pr.id === c.id);
+      return `<span>${p.name} × ${c.qty} — ${fmt(p.price * c.qty)}</span>`;
+    }).join("");
+
+    body.innerHTML = `
+      <button class="back-link" onclick="openDrawer('cart')">← Back to bag</button>
+      <div class="checkout-order-summary">${summary}</div>
+      <div class="field">
+        <label for="custName">Full name</label>
+        <input type="text" id="custName" placeholder="Your name" required>
+      </div>
+      <div class="field">
+        <label for="custPhone">Phone number</label>
+        <input type="tel" id="custPhone" placeholder="10-digit mobile number" required>
+      </div>
+      <div class="field">
+        <label for="custAddress">Delivery address</label>
+        <textarea id="custAddress" rows="3" placeholder="House no, street, city, pincode" required></textarea>
+      </div>
+    `;
+    foot.innerHTML = `
+      <div class="total-row"><span>Total</span><span>${fmt(cartTotal())}</span></div>
+      <button class="btn btn-primary btn-full" id="sendOrderBtn">Send Order on WhatsApp</button>
+    `;
+    document.getElementById("sendOrderBtn").addEventListener("click", sendOrder);
+  }
+}
+
+function sendOrder(){
+  const name = document.getElementById("custName").value.trim();
+  const phone = document.getElementById("custPhone").value.trim();
+  const address = document.getElementById("custAddress").value.trim();
+
+  if(!name || !phone || !address){
+    alert("Please fill in your name, phone number, and address before sending the order.");
+    return;
+  }
+
+  let msg = `New Order — VASTRA\n\n`;
+  msg += `Customer Name: ${name}\n`;
+  msg += `Phone: ${phone}\n`;
+  msg += `Address: ${address}\n\n`;
+  msg += `Items:\n`;
+  cart.forEach(c => {
+    const p = PRODUCTS.find(pr => pr.id === c.id);
+    msg += `- ${p.name} (${p.type}, ${p.gender === "male" ? "Male" : "Female"}, ${p.age} yrs) x${c.qty} = ${fmt(p.price * c.qty)}\n`;
+  });
+  msg += `\nOrder Total: ${fmt(cartTotal())}`;
+
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+  window.open(url, "_blank");
+}
+
+// ---------------- FILTER EVENTS ----------------
+document.getElementById("searchInput").addEventListener("input", e => {
+  state.search = e.target.value;
+  renderProducts();
+});
+
+document.getElementById("genderChips").addEventListener("click", e => {
+  const btn = e.target.closest(".chip");
+  if(!btn) return;
+  document.querySelectorAll("#genderChips .chip").forEach(c => c.classList.remove("active"));
+  btn.classList.add("active");
+  state.gender = btn.dataset.gender;
+  renderProducts();
+});
+
+function bindCheckboxGroup(containerId, stateKey){
+  document.getElementById(containerId).addEventListener("change", e => {
+    if(e.target.type !== "checkbox") return;
+    const checked = Array.from(document.querySelectorAll(`#${containerId} input:checked`)).map(i => i.value);
+    state[stateKey] = checked;
+    renderProducts();
+  });
+}
+bindCheckboxGroup("ageOptions", "ages");
+bindCheckboxGroup("typeOptions", "types");
+bindCheckboxGroup("priceOptions", "prices");
+
+document.getElementById("clearFilters").addEventListener("click", () => {
+  state = { search: state.search, gender: "all", ages: [], types: [], prices: [] };
+  document.querySelectorAll("#genderChips .chip").forEach(c => c.classList.remove("active"));
+  document.querySelector('#genderChips .chip[data-gender="all"]').classList.add("active");
+  document.querySelectorAll('.filter-options input[type="checkbox"]').forEach(cb => cb.checked = false);
+  renderProducts();
+});
+
+// ---------------- DRAWER EVENTS ----------------
+document.getElementById("cartBtn").addEventListener("click", () => openDrawer("cart"));
+document.getElementById("drawerClose").addEventListener("click", closeDrawer);
+document.getElementById("overlay").addEventListener("click", closeDrawer);
+
+// ---------------- MOBILE FILTER PANEL ----------------
+const filtersPanel = document.getElementById("filtersPanel");
+document.getElementById("filterToggle").addEventListener("click", () => filtersPanel.classList.add("open"));
+document.getElementById("filtersClose").addEventListener("click", () => filtersPanel.classList.remove("open"));
+
+// ---------------- INIT ----------------
+renderProducts();
+updateCartCount();
+</script>
+</body>
+</html>
